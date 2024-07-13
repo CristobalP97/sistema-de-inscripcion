@@ -1,0 +1,148 @@
+<html>
+<head>
+<style>
+    @page {
+        size: a2 landscape;
+    }
+
+    .head {
+        text-align: center;
+        padding-top: 30px;
+        font-weight: bold;
+    }
+
+    .filas {
+        width: 10%;
+    }
+
+    .contenido {
+        text-align: center;
+        border: 1px solid black;
+        padding-top: 3px;
+    }
+    
+    .contenedor {
+        margin-left: 10px;
+    }
+
+    .resaltar {
+        font-size: xx-large;
+    }
+
+    .mover {
+        margin-left: 100px;
+    }
+
+    .mover2 {
+        margin-left: 5px;
+    }
+</style>
+<head>
+    <body>
+<!-- <img src="" class="img-invoice"> -->
+<p class="head resaltar">
+    Republica Bolivariana de Venezuela<br>
+    Ministerio de Poder Popular para Eduación<br>
+    Escuela Basica "Magin Duran Vargas"<br>
+    Punta de Mata, Edo Monagas<br>
+    <br>
+    ESCUELA BASICA "MAGIN DURAN VARGAS"<br>
+    <br>
+    <spam class="resaltar">Reporte General</spam><br>
+</p>
+<p class="mover">
+    <b>{{ estudiante.grado }}</b> <br>
+    <b>FECHA DE EMISIÓN:</b> {{ fec }}<br>
+    <!-- <b>CLIENTE:</b> {{ sale.cli.names|upper }}<br> -->
+    <!-- <b>DNI:</b> {{ sale.cli.dni }}<br> -->
+</p>
+<table class="">
+    <thead class="">
+        <tr>
+            <th scope="col" class="filas">Ced. Escolar</th>
+            <th scope="col" class="filas">Cedula</th>
+            <th scope="col" class="filas">Nombres y Apellidos</th>
+            <th scope="col" class="filas">Lugar de Nacimiento</th>
+            <th scope="col" class="filas">Fecha de Nacimiento</th>
+            <th scope="col" class="filas">Edad</th>
+            <th scope="col" class="filas">Genero</th>
+            <th scope="col" class="filas">Repite</th>
+            <th scope="col" class="filas">Camisa</th>
+            <th scope="col" class="filas">Pantalon</th>
+            <th scope="col" class="filas">Zapato</th>
+            <th scope="col" class="filas">Peso</th>
+            <!-- <th scope="col filas" class="filas">Enfermedad</th> -->
+            <th scope="col" class="filas">Cedula del Representante</th>
+            <th scope="col" class="filas">Nombres y apellidos</th>
+            <th scope="col" class="filas">Fecha de Nacimiento</th>
+            <th scope="col" class="filas">Parentesco</th>
+            <th scope="col" class="filas">Dirección</th>
+            <th scope="col" class="filas">Telefono</th> 
+            <!-- <th scope="col" class="px-4 py-3">
+                <span class="sr-only">Opciones</span>
+            </th> -->
+        </tr>
+    </thead>
+    <tbody>
+
+        {% for estudiantes in estudiante %}
+        <tr class="mover2">
+            <th scope="row" class=" contenido" >{{estudiantes.ced_estudiantil}}</th>
+            <td class="px-4 py-3 contenido">
+                {% if estudiantes.fk_persona.cedula == estudiantes.ced_estudiantil %}
+                No posee
+                {% elif estudiantes.fk_persona.cedula != estudiantes.ced_estudiantil %}
+                {{estudiantes.fk_persona.cedula}}
+                {% endif %}
+            </td>
+            <td class="px-4 py-3 contenido">{{estudiantes.fk_persona.nombres}} {{estudiantes.fk_persona.apellidos}}</td>
+            <td class="px-4 py-3 contenido">{{estudiantes.lugar_nac}}</td>
+            <td class="px-4 py-3 contenido">{{estudiantes.fk_persona.fec_nac}}</td>
+            <td class="px-4 py-3 contenido">{{estudiantes.fk_persona.edad}}</td>
+            <td class="px-4 py-3 contenido">
+                {% if estudiantes.fk_persona.sexo == 'H' %}
+                Niño
+                {% elif estudiantes.fk_persona.sexo == 'M' %}
+                Niña
+                {% endif %}</td>
+            <td class="px-4 py-3 contenido">
+                {% if estudiantes.repite == True %}
+                Si
+                {% else %}
+                No
+                {% endif %}
+            </td>
+            <td class="px-4 py-3 contenido">{{estudiantes.fk_tallas.camisa}}</td>
+            <td class="px-4 py-3 contenido">{{estudiantes.fk_tallas.pantalon}}</td>
+            <td class="px-4 py-3 contenido">{{estudiantes.fk_tallas.estatura}}</td>
+            <td class="px-4 py-3 contenido">{{estudiantes.fk_tallas.peso}} KG</td>
+            {% comment %}<td class="px-4 py-3 contenido">{{estudiantes.fk_estudiante.enfermedad}}</td>{% endcomment %}
+            <td class="px-4 py-3 contenido">{{estudiantes.fk_representante.fk_relacion.fk_persona.cedula}}</td>
+            <td class="px-4 py-3 contenido">{{estudiantes.fk_representante.fk_relacion.fk_persona.nombres}} {{estudiantes.fk_representante.fk_relacion.fk_persona.apellidos}}</td>
+            <td class="px-4 py-3 contenido">{{estudiantes.fk_representante.fk_relacion.fk_persona.fec_nac}}</td>
+            <td class="px-4 py-3 contenido">
+                {% if estudiantes.fk_representante.fk_relacion.vinculo == 'M' %}
+                Mamá
+                {% elif estudiantes.fk_representante.fk_relacion.vinculo == 'P' %}
+                Papá
+                {% elif estudiantes.fk_representante.fk_relacion.vinculo == 'T' %}
+                Ti@
+                {% elif estudiantes.fk_representante.fk_relacion.vinculo == 'A' %}
+                Abuel@
+                {% elif estudiantes.fk_representante.fk_relacion.vinculo == 'H' %}
+                Herman@
+                {% endif %}
+                {{estudiantes.fk_representante.fk_relacion.vinculo}}</td>
+            <td class="px-4 py-3 contenido">{{estudiantes.fk_representante.fk_info_cont.direccion}}</td>
+            <td class="px-4 py-3 contenido">{{estudiantes.fk_representante.fk_info_cont.telefono}}</td> 
+            <td class="px-4 py-3 flex items-center justify-end">
+                <div>
+                </div>
+            </td>
+        </tr>
+        {% endfor %}
+
+    </tbody>
+</table>
+</body>
+</html>

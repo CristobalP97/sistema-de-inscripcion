@@ -1,0 +1,26 @@
+
+{% load static tailwind_tags %}
+
+{% tailwind_css %}
+
+<section class="min-h-full py-5">
+    <div class="mx-auto max-w-screen-xl px-2 lg:px-12">
+        <!-- Start coding here -->
+        <div class='my-20 mx-10 text-center' style='height=10em;'>
+            {% comment %} <p class='p-2'>Estamos comprometidos con fomentar el amor por el aprendizaje y brindar las herramientas necesarias para que cada estudiante alcance su máximo potencial. Nuestro nuevo sistema de registro escolar está diseñado para agilizar los procesos administrativos, permitiendo a nuestros maestros y personal enfocarse en lo más importante: la educación de nuestros niños. Juntos, construyamos un futuro brillante a través del estudio y el aprendizaje.</p> {% endcomment %}
+
+        </div>
+        <div class="bg-slate-300 rounded-md shadow-m overflow-hidden" style="">
+            <div class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 ">
+                {% comment %} <img class=' h-80  w-screen' src='{% static 'img\lobby\banner.png' %}'> {% endcomment %}
+                <p class='py-8 px-10 font-sans text-2xl' style=" font-family: 'Times New Roman', Times, serif;">Estamos comprometidos con fomentar el amor por el aprendizaje y brindar las herramientas necesarias para que cada estudiante alcance su máximo potencial. Nuestro nuevo sistema de registro escolar está diseñado para agilizar los procesos administrativos, permitiendo a nuestros maestros y personal enfocarse en lo más importante: la educación de nuestros niños. Juntos, construyamos un futuro brillante a través del estudio y el aprendizaje.</p>
+                <img style="" class='h-80' src='{% static 'img\lobby\schoolchildrens.png' %}'>
+            </div>
+        </div>
+        
+        {% comment %} <div class='my-8 ' style='height=4em;'>
+            <p>Un pueblo ignorante es instrumento ciego para su destrucción <br> <small>Simon Bolivar, 1783 - 1830<small></p>
+                <img class='rounded-md' src='{% static 'img\lobby\bolivar.jpg' %}' style='height:30em;'>
+        </div> {% endcomment %}
+    </div>
+</section>

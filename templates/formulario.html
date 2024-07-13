@@ -1,0 +1,247 @@
+{% load static %}
+{% load static tailwind_tags %}
+
+{% tailwind_css %}
+
+<section class="min-h-full py-5">
+    <div class="mx-auto max-w-screen-xl px-2 lg:px-12">
+        <!-- Start coding here -->
+        <div class="bg-white relative shadow-md rounded-lg overflow-hidden p-4">
+        <h2 class="mb-4 text-xl font-bold text-gray-900 ">Formulario - Estudiante</h2>
+        <form method="POST" id='form_registro'>
+            {% csrf_token %}
+            <div class="grid gap-4 mb-4 sm:grid-cols-2 sm:gap-6 sm:mb-5">
+                <!-- campo nombre -->
+                {% if estudiante %}
+                    <!-- campo identificador para la actualizacion de informacion de un registro -->
+                    <input type="hidden" value="{{estudiante.id}}" name="id_estudiante">
+                {% endif %}
+                <div class="w-full">
+                    <label for="estudiante-nombres" class="block mb-2 text-sm font-medium text-gray-900 ">Nombre</label>
+                    <input type="text" name="estudiante-nombres" id="estudiante-nombres"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+                        placeholder="Nombre" required="" autocomplete="off" {% if estudiante %}value='{{estudiante.fk_persona.nombres}}'{% endif %}>
+                </div>
+                <!-- campo apellido -->
+                <div class="w-full">
+                    <label for="estudiante-apellidos" class="block mb-2 text-sm font-medium text-gray-900 ">Apellido</label>
+                    <input type="text" name="estudiante-apellidos" id="estudiante-apellidos"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+                        placeholder="Apellido" required="" autocomplete="off" {% if estudiante %}value='{{estudiante.fk_persona.apellidos}}'{% endif %}>
+                </div>
+                <div class="flex justify-between gap-4 sm:col-span-2">
+                    <!-- campo cedula -->
+                    <div class="w-full mr-5">
+                        <label for="estudiante-cedula" class="block mb-2 text-sm font-medium text-gray-900 ">Cedula</label>
+                        <input type="text" name="estudiante-cedula" id="estudiante-cedula"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+                             placeholder="Cedula" maxlength="8" autocomplete="off" {% if estudiante %}{% if estudiante.fk_persona.cedula != estudiante.ced_estudiantil %}value='{{estudiante.fk_persona.cedula}}'{% endif %}{% endif %}>
+                    </div>
+                    <!-- campo fecha de nacimiento -->
+                    <div class="w-full mr-5">
+                        <label for="estudiante-fec_nac" class="block mb-2 text-sm font-medium text-gray-900 ">Fecha de
+                            nacimiento</label>
+                        <input type="date" name="estudiante-fec_nac" id="estudiante-fec_nac"
+                            class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" {% if estudiante %}value='{{fecha}}'{% endif %} required="">
+                    </div>
+                    <!-- campo edad -->
+                    <div class="w-full">
+                        <label for="estudiante-edad" class="block mb-2 text-sm font-medium text-gray-900 ">Edad</label>
+                        <input type="number" name="estudiante-edad" id="estudiante-edad"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+                             placeholder="Edad" required="" autocomplete="off" readonly="" {% if estudiante %}value='{{estudiante.fk_persona.edad}}'{% endif %}>
+                    </div>
+                </div>
+                <div class="flex justify-between gap-4 sm:col-span-2">
+                    <!-- campo sexo -->
+                    <div class="w-full mr-5">
+                        <label for="estudiante-sexo" class="block mb-2 text-sm font-medium text-gray-900">Sexo</label>
+                        <select id="estudiante-sexo" name="estudiante-sexo" 
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                            <option value="H" {% if estudiante %}{% if estudiante.fk_persona.sexo == 'H' %}selected{% endif %}{% endif %}>Niño</option>
+                            <option value="M" {% if estudiante %}{% if estudiante.fk_persona.sexo == 'M' %}selected{% endif %}{% endif %}>Niña</option>
+                        </select>
+                    </div>
+                    <!-- campo fecha de cedula estudiandil -->
+                    <div class="w-full mr-5">
+                        <label for="estudiante-ced_estudiantil" class="block mb-2 text-sm font-medium text-gray-900 ">Cedula
+                            Estudiantil</label>
+                        <input type="text" name="estudiante-ced_estudiantil" id="estudiante-ced_estudiantil"
+                            class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+                             placeholder="Cedula estudiantil" required="" maxlength="8" autocomplete="off" {% if estudiante %}value='{{estudiante.ced_estudiantil}}'{% endif %}>
+                    </div>
+                    <!-- campo grado -->
+                    <div class="w-full">
+                        <label for="estudiante-grado" class="block mb-2 text-sm font-medium text-gray-900">Grado</label>
+                        <select id="estudiante-grado" name="estudiante-grado" 
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                            <option value="1" {% if estudiante %}{% if estudiante.grado == '1' %}selected{% endif %}{% endif %}>Primer grado</option>
+                            <option value="2" {% if estudiante %}{% if estudiante.grado == '2' %}selected{% endif %}{% endif %}>Segundo grado</option>
+                            <option value="3" {% if estudiante %}{% if estudiante.grado == '3' %}selected{% endif %}{% endif %}>Tercer grado</option>
+                            <option value="4" {% if estudiante %}{% if estudiante.grado == '4' %}selected{% endif %}{% endif %}>Cuarto grado</option>
+                            <option value="5" {% if estudiante %}{% if estudiante.grado == '5' %}selected{% endif %}{% endif %}>Quinto grado</option>
+                            <option value="6" {% if estudiante %}{% if estudiante.grado == '6' %}selected{% endif %}{% endif %}>Sexto grado</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="flex justify-between gap-4 sm:col-span-2">
+                    <!-- campo lugar de nacimiento -->
+                    <div class="w-full mr-5">
+                        <label for="estudiante-lugar_nac" class="block mb-2 text-sm font-medium text-gray-900 ">Lugar de
+                            nacimiento</label>
+                        <input type="text" name="estudiante-lugar_nac" id="estudiante-lugar_nac"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+                             placeholder="Lugar de nacimiento" required="" autocomplete="off" {% if estudiante %}value='{{estudiante.lugar_nac}}'{% endif %}>
+                    </div>
+                    <!-- campo seccion -->
+                    <div class="w-full mr-5">
+                        <label for="estudiante-seccion" class="block mb-2 text-sm font-medium text-gray-900">Seccion</label>
+                        <select id="estudiante-seccion" name="estudiante-seccion" 
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                            <option value="A" {% if estudiante %}{% if estudiante.seccion == 'A' %}selected{% endif %}{% endif %}>A</option>
+                            <option value="B" {% if estudiante %}{% if estudiante.seccion == 'B' %}selected{% endif %}{% endif %}>B</option>
+                            <option value="C" {% if estudiante %}{% if estudiante.seccion == 'C' %}selected{% endif %}{% endif %}>C</option>
+                            <option value="D" {% if estudiante %}{% if estudiante.seccion == 'D' %}selected{% endif %}{% endif %}>D</option>
+                        </select>
+                    </div>
+                    <!-- campo emfermedad -->
+                    <div class="w-full">
+                        <label for="estudiante-enfermedad" class="block mb-2 text-sm font-medium text-gray-900 ">Enfermedad</label>
+                        <input type="text" name="estudiante-enfermedad" id="estudiante-enfermedad"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+                            placeholder="Enfermedad" {% if enfermedad %}value='{{enfermedad.enfermedad}}'{% endif %}>
+                    </div>
+                </div>
+                <div class="flex justify-between gap-4 sm:col-span-2">
+                    <!-- campo Camisa -->
+                    <div class="w-full mr-5">
+                        <label for="talla-camisa" class="block mb-2 text-sm font-medium text-gray-900 ">Camisa</label>
+                        <input type="text" name="talla-camisa" id="talla-camisa"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+                             placeholder="Camisa" required="" {% if estudiante %}value='{{estudiante.fk_tallas.camisa}}'{% endif %}>
+                    </div>
+                    <!-- campo Pantalon -->
+                    <div class="w-full mr-5">
+                        <label for="talla-pantalon" class="block mb-2 text-sm font-medium text-gray-900 ">Pantalon</label>
+                        <input type="text" name="talla-pantalon" id="talla-pantalon"
+                            class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+                             placeholder="Pantalon" required="" {% if estudiante %}value='{{estudiante.fk_tallas.pantalon}}'{% endif %}>
+                    </div>
+                    <!-- campo Estatura -->
+                    <div class="w-full mr-5">
+                        <label for="talla-estatura" class="block mb-2 text-sm font-medium text-gray-900 ">Estatura</label>
+                        <input type="text" name="talla-estatura" id="talla-estatura"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+                             placeholder="Estatura" required="" {% if estudiante %}value='{{estudiante.fk_tallas.estatura}}'{% endif %}>
+                    </div>
+                    <!-- campo Peso -->
+                    <div class="w-full">
+                        <label for="talla-peso" class="block mb-2 text-sm font-medium text-gray-900 ">Peso</label>
+                        <input type="text" name="talla-peso" id="talla-peso"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+                             placeholder="Peso" required="" {% if estudiante %}value='{{estudiante.fk_tallas.peso}}'{% endif %}>
+                    </div>
+                </div>
+                <div class="flex justify-end sm:col-span-2">
+                    <!-- campo checkbox Repite -->
+                    <fieldset>
+                        <legend class="sr-only"></legend>
+                        <div class="mb-4">
+                            <label for="estudiante-repite"
+                                class=" mt-9 text-sm font-medium text-gray-900 dark:text-gray-300">Repite</label>
+                            <input id="estudiante-repite" name="estudiante-repite" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-50 border-gray-300 rounded focus:ring-blue-500"  {% if estudiante %}value='{{estudiante.repite}}'{% endif %}>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+            <h2 class="mb-4 text-xl font-bold text-gray-900 ">Formulario - Representante</h2>
+            <div class="grid gap-4 mb-4 sm:grid-cols-2 sm:gap-6 sm:mb-5">
+                <!-- campo nombre -->
+                    <div class="flex justify-between gap-4 sm:col-span-2">
+                        <!-- campo cedula -->
+                        <div class="w-full mr-5">
+                            <label for="representate-cedula" class="block mb-2 text-sm font-medium text-gray-900 ">Cedula</label>
+                            <input type="text" name="representate-cedula" id="representate-cedula"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+                             placeholder="Cedula" required="" autocomplete="off" maxlength="8" {% if estudiante %}value='{{estudiante.fk_representante.fk_relacion.fk_persona.cedula}}'{% endif %}>
+                        </div>
+                        <!-- campo fecha de nacimiento -->
+                        <div class="w-full mr-5">
+                            <label for="representate-fec_nac" class="block mb-2 text-sm font-medium text-gray-900 ">Fecha de
+                            nacimiento</label>
+                            <input type="date" name="representate-fec_nac" id="representate-fec_nac"
+                            class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" {% if estudiante %}value='{{fecha2}}'{% endif %} required="">
+                        </div>
+                        <!-- campo edad -->
+                        <div class="w-full">
+                            <label for="representate-edad" class="block mb-2 text-sm font-medium text-gray-900 ">Edad</label>
+                            <input type="number" name="representate-edad" id="representate-edad"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+                             placeholder="Edad" required="" readonly="" {% if estudiante %}value='{{estudiante.fk_representante.fk_relacion.fk_persona.edad}}'{% endif %}>
+                        </div>
+                    </div>
+                    <div class="w-full">
+                        <label for="representate-nombres" class="block mb-2 text-sm font-medium text-gray-900 ">Nombre</label>
+                        <input type="text" name="representate-nombres" id="representate-nombres" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+                        placeholder="Nombre" required="" autocomplete="off" {% if estudiante %}value='{{estudiante.fk_representante.fk_relacion.fk_persona.nombres}}'{% endif %}>
+                    </div>
+                    <!-- campo apellido -->
+                    <div class="w-full">
+                        <label for="representate-apellidos" class="block mb-2 text-sm font-medium text-gray-900 ">Apellido</label>
+                        <input type="text" name="representate-apellidos" id="representate-apellidos"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+                        placeholder="Apellido" required="" autocomplete="off" {% if estudiante %}value='{{estudiante.fk_representante.fk_relacion.fk_persona.apellidos}}'{% endif %}>
+                    </div>
+                    
+                    <div class="flex justify-between gap-4 sm:col-span-2">
+                        <!-- campo sexo -->
+                        <div class="w-full mr-5">
+                            <label for="representate-sexo" class="block mb-2 text-sm font-medium text-gray-900">Sexo</label>
+                            <select id="representate-sexo" name="representate-sexo" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                                <option value="M" {% if estudiante %}{% if estudiante.fk_representante.fk_relacion.fk_persona.sexo == 'M' %}selected{% endif %}{% endif %}>Mujer</option>
+                                <option value="H" {% if estudiante %}{% if estudiante.fk_representante.fk_relacion.fk_persona.sexo == 'H' %}selected{% endif %}{% endif %}>Hombre</option>
+                            </select>
+                        </div>
+                        <!-- campo Vinculo -->
+                        <div class="w-full mr-5">
+                            <label for="representate-vinculo" class="block mb-2 text-sm font-medium text-gray-900">Vinculo</label>
+                            <select id="representate-vinculo" name="representate-vinculo" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                                <option value="M" {% if estudiante %}{% if estudiante.fk_representante.fk_relacion.vinculo == 'M' %}selected{% endif %}{% endif %}>Mamá</option>
+                                <option value="P" {% if estudiante %}{% if estudiante.fk_representante.fk_relacion.vinculo == 'P' %}selected{% endif %}{% endif %}>Papá</option>
+                                <option value="T" {% if estudiante %}{% if estudiante.fk_representante.fk_relacion.vinculo == 'T' %}selected{% endif %}{% endif %}>Tio(a)</option>
+                                <option value="A" {% if estudiante %}{% if estudiante.fk_representante.fk_relacion.vinculo == 'A' %}selected{% endif %}{% endif %}>Abuelo(a)</option>
+                                <option value="H" {% if estudiante %}{% if estudiante.fk_representante.fk_relacion.vinculo == 'H' %}selected{% endif %}{% endif %}>Hermano(a)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-between gap-4 sm:col-span-2">
+                        <!-- campo Direccion -->
+                        <div class="w-full mr-5">
+                            <label for="contacto-direccion" class="block mb-2 text-sm font-medium text-gray-900 ">Direccion</label>
+                            <input type="text" name="contacto-direccion" id="contacto-direccion" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+                            placeholder="Direccion" required="" {% if estudiante %}value='{{estudiante.fk_representante.fk_info_cont.direccion}}'{% endif %}>
+                        </div>
+                        <!-- campo Telefono -->
+                        <div class="w-full">
+                            <label for="contacto-telefono" class="block mb-2 text-sm font-medium text-gray-900 ">Telefono</label>
+                            <input type="number" name="contacto-telefono" id="contacto-telefono"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+                            placeholder="Telefono" required="" autocomplete="off" {% if estudiante %}value='{{estudiante.fk_representante.fk_info_cont.telefono}}'{% endif %}>
+                        </div>
+                    </div>
+                </div>
+                <!-- campo boton enviar -->
+                <button type="submit" id="registrar" class="w-full text-gray-600 items-center border focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+                    {% if estudiante %}
+                        Actualizar
+                        {% else%}
+                        Registrar
+                    {% endif %}
+                </button>
+            </div>
+        </form>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,35 @@
+[33mcommit 0d67833be4b3b08e7c06113fa154b2f18f073c52[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m)[m
+Author: cristobal <cristobalalejandrop96@gmail.com>
+Date:   Thu May 6 02:59:11 2010 -0430
+
+    se dejo de usar la api form para usar el diseño de sebas
+
+[33mcommit 3b4334f4f3be10fabd0a872bed2cbd42e268e2d2[m
+Author: cristobal <cristobalalejandrop96@gmail.com>
+Date:   Thu May 6 00:08:15 2010 -0430
+
+    archivos dinamicos al iniciar sesion listo
+
+[33mcommit 0b49d10d72413dc2d50fd3e03de7663fec7d9d01[m
+Author: cristobal-pc <cristobalalejandrop97@gmail.com>
+Date:   Sun May 19 20:52:36 2024 -0400
+
+    primer commit en desktop
+
+[33mcommit dc9e93476bfabecd6184c55bbb5155ce3a638566[m
+Author: cristobal <cristobalalejandrop96@gmail.com>
+Date:   Thu May 6 03:09:02 2010 -0430
+
+    hay que crear funcion para el retorno de los ficheros js y acomodar lo anterior
+
+[33mcommit 71af8047b3e70b7717450592e46de8a6df48e0a9[m
+Author: cristobal <cristobalalejandrop96@gmail.com>
+Date:   Thu May 6 02:43:40 2010 -0430
+
+    inicio de sesion y registro listo, falta validar campos
+
+[33mcommit 259a014d0d0d7a2d5df73ddbd5017cd586afca31[m
+Author: cristobal <cristobalalejandrop96@gmail.com>
+Date:   Thu May 6 00:07:50 2010 -0430
+
+    comienzo :v

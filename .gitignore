@@ -1,0 +1,13 @@
+   # Ignorar archivos generados por Django
+   *.pyc
+   __pycache__
+
+   # Ignorar archivos de configuración local
+   #db.sqlite3
+   #/media/
+   #/static/
+
+   # Ignorar archivos de dependencias de Python
+   /proyecto-escuela/
+   /env/
+   

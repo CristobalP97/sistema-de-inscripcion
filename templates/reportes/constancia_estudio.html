@@ -1,0 +1,105 @@
+
+{% load static tailwind_tags %}
+
+{% tailwind_css %}
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    {% csrf_token %}
+    <title>Constancia de Estudio</title>
+    <!-- <style>
+      body {
+        font-family: Arial, sans-serif;
+      }
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+      h1 {
+        text-align: center;
+      }
+      p {
+        text-align: justify;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>ESCUELA BASICA "MAGIN DURAN VARGAS" PUNTA DE MATA ESTADO MONAGAS</h1>
+      <h2 style="text-align: center;">Constancia de Estudio</h2>
+      
+      <p>
+        Quien suscribe, Directora de la Escula Básica "Magin Duran Vargas", que funciona en Punta de Mata, Municipio Ezequiel Zamora del Estado Monagas, hace constar por medio de la presente que <bold>{{ estudiante.fk_persona.nombres }} {{ estudiante.fk_persona.apellidos }} que tiene el numero de cedula {{ estudiante.fk_persona.cedula }}</bold> se le hace entrega de este documento de constancia de estudio.
+
+        Constancia que se expide a solicitud de parte interesada 
+        
+      </p>
+      
+      <p>Fecha de emisión:{{ fec }}</p>
+      <p>Firma del director:</p>
+    </div>
+  </body> -->
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+    }
+    p {
+      text-align: justify;
+      padding: 20px 80px;
+    }
+
+    .head {
+      text-align: center;
+      text-transform: uppercase;
+      font-weight: bold;
+      /* font-size: xx-large; */
+  }
+  .resaltar {
+      font-size: large;
+  }
+
+  .x {
+    font-weight: bold;
+  }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <p class="head resaltar">
+      Republica Bolivariana de Venezuela<br>
+      Ministerio de Poder Popular para Eduación<br>
+      Escuela Basica "Magin Duran Vargas"<br>
+      Punta de Mata, Edo Monagas<br>
+      <br>
+      ESCUELA BASICA "MAGIN DURAN VARGAS"<br>
+      <br>
+      <spam class="resaltar">Constancia de Buena Conducta</spam><br>
+    </p>
+    
+    <p class="resaltar">
+      Quien suscribe, la Director(a) Milene Acosta de la Escula Básica "Magin Duran Vargas", que funciona en Punta de Mata, Municipio Ezequiel Zamora del Estado Monagas, hace constar por medio de la presente que {{ estudiante.fk_persona.nombres }} {{ estudiante.fk_persona.apellidos }} portador de la cedula {{ estudiante.fk_persona.cedula }} se le hace entrega de este documento de constancia de estudio.
+      <br>
+      <br>
+      Sin mas que agregar me despido.
+      <br>
+      <br>
+      Constancia que se expide a solicitud de parte interesada en la fecha {{ fec }}
+    </p>
+    
+    <!-- <p>Fecha de emisión:</p> -->
+    <p class="resaltar x"><spam>Firma del Director(a):</spam></p>
+  </div>
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<style>
+    .img-invoice {
+        width: 50px;
+        text-align: center;
+        margin: 0 auto;
+    }
+
+    .head {
+        text-align: center;
+        text-transform: uppercase;
+        font-weight: bold;
+    }
+
+    #invoice thead tr th {
+        text-align: left;
+        border-bottom: 1px solid black;
+        border-top: 1px solid black;
+        padding-top: 4px;
+    }
+
+    #invoice thead tr {
+        margin-bottom: 0;
+        padding-bottom: 0;
+    }
+
+    #invoice tbody tr {
+        padding: 0;
+    }
+
+    .text-center{
+        text-align: center;
+    }
+
+    .resaltar {
+        font-size: large;
+    }
+</style>
+<body>
+<!-- <img src="" class="img-invoice"> -->
+<p class="head" style="text-align: center;
+text-transform: uppercase;
+font-weight: bold;">
+<p class="head resaltar">
+    Republica Bolivariana de Venezuela<br>
+    Ministerio de Poder Popular para Eduación<br>
+    Escuela Basica "Magin Duran Vargas"<br>
+    Punta de Mata, Edo Monagas<br>
+    <br>
+    ESCUELA BASICA "MAGIN DURAN VARGAS"<br>
+    <br>
+    <spam class="resaltar">Reporte Por Sección</spam><br>
+
+<p>
+    <b>SECCION y GRADO:{{ seccion }}</b> <br>
+    <b>FECHA DE EMISIÓN:</b> {{ fec }}<br>
+    <!-- <b>CLIENTE:</b> {{ sale.cli.names|upper }}<br> -->
+    <!-- <b>DNI:</b> {{ sale.cli.dni }}<br> -->
+</p>
+<table id="invoice">
+    <thead>
+    <tr>
+        <th style="width: 15%;">NOMBRE</th>
+        <th style="width: 15%;">APELLIDO</th>
+        <th style="width: 15%;">CEDULA</th>
+        <th style="width: 20%;">CED.ESTUDIANTIL</th>
+        <th style="width: 20%;">FECHA DE NACIMIENTO</th>
+        <th style="width: 10%;">EDAD</th>
+        <th style="width: 15%;">REPITE</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for estudiantes in estudiante %}
+        <tr {% if forloop.first %}style="padding-top: 3px;" {% endif %}>
+            <!-- <td class="">{% comment %} {{ estudiantes.fk_persona.grado }} {% endcomment %}</td> -->
+            <td class="">{{estudiantes.fk_persona.nombres}}</td>
+            <td class="">{{estudiantes.fk_persona.apellidos}}</td>
+            <td>
+                {% if estudiantes.fk_persona.cedula == estudiantes.ced_estudiantil %}
+                No posee
+                {% elif estudiantes.fk_persona.cedula != estudiantes.ced_estudiantil %}
+                {{estudiantes.fk_persona.cedula}}
+                {% endif %}
+            </td>
+            <td>{{estudiantes.ced_estudiantil}}</td>
+            <td>{{estudiantes.fk_persona.fec_nac}}</td>
+            <td>{{estudiantes.fk_persona.edad}}</td>
+            <td>
+                {% if estudiantes.repite == True %}
+                Si
+                {% else %}
+                No
+                {% endif %}
+            </td>
+        </tr>
+    {% endfor %}
+    <tr style="border-top: 1px solid black; padding-top: 4px;">
+        <td colspan="4"><b></b></td>
+        <td style="text-align: right">{{ sale.subtotal }}</td>
+    </tr>
+    <tr style="padding-top: 0px;">
+        <td colspan="4"><b></b></td>
+        <td style="text-align: right">{{ sale.iva }}</td>
+    </tr>
+    <tr style="padding-top: 0px;">
+        <td colspan="4"><b></b></td>
+        <td style="text-align: right"></td>
+    </tr>
+    </tbody>
+</table>
+<table style="margin-top: 250px;">
+    <!-- <thead>
+    <tr>
+        <th>********</th>
+    </tr>
+    <tr>
+        <th>PIE DE PAGINA</th>
+    </tr>
+    </thead> -->
+</table>
+</body>
+</html>
